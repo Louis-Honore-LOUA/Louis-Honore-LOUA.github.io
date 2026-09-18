@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louis Honoré LOUA — Network Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;        /* deep navy ink */
+    --ink-soft:#3A4A6B;
+    --paper:#FBFAF7;      /* warm off-white */
+    --paper-2:#F2EFE9;
+    --line:#DDD8CE;
+    --accent:#1B6B5A;     /* teal green — network/uptime */
+    --accent-soft:#E4EFEA;
+    --amber:#C8792B;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+
+  /* ---- NAV ---- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,250,247,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:.01em}
+  .brand span{color:var(--accent)}
+  .navlinks{display:flex;gap:28px}
+  .navlinks a{font-size:14px;font-weight:500;color:var(--ink-soft);transition:color .2s}
+  .navlinks a:hover{color:var(--accent)}
+  .navtoggle{display:none;background:none;border:none;cursor:pointer;font-size:22px;color:var(--ink)}
+  @media(max-width:720px){
+    .navlinks{display:none}
+    .navtoggle{display:block}
+  }
+
+  /* ---- HERO ---- */
+  header{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);
+    letter-spacing:.02em;margin-bottom:20px;
+  }
+  .hero-title{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(40px,7vw,76px);line-height:1.02;letter-spacing:-.02em;
+    color:var(--ink);margin-bottom:22px;
+  }
+  .hero-sub{font-size:clamp(17px,2.5vw,21px);color:var(--ink-soft);max-width:60ch;margin-bottom:36px}
+  .hero-sub strong{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:2px;font-size:15px;font-weight:600;
+    transition:transform .15s, background .2s, box-shadow .2s;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#155445;transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);background:var(--white)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* stat strip */
+  .stats{display:flex;gap:48px;margin-top:56px;flex-wrap:wrap}
+  .stat .num{font-family:'Fraunces',serif;font-weight:600;font-size:40px;color:var(--accent);line-height:1}
+  .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px;max-width:16ch}
+
+  /* ---- SECTIONS ---- */
+  section{padding:80px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px}
+  .sec-idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)}
+  .sec-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4vw,36px);letter-spacing:-.01em}
+
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-grid p{color:var(--ink-soft);margin-bottom:16px;font-size:16.5px}
+  .about-grid p strong{color:var(--ink)}
+  .facts{border-left:2px solid var(--accent);padding-left:22px}
+  .fact{margin-bottom:20px}
+  .fact .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:2px}
+  .fact .v{font-size:15px;color:var(--ink)}
+
+  /* skills */
+  .skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  @media(max-width:720px){.skill-grid{grid-template-columns:1fr}}
+  .skill-card{background:var(--white);border:1px solid var(--line);padding:26px}
+  .skill-card h3{font-size:15px;font-weight:600;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    background:var(--paper-2);color:var(--ink-soft);
+    padding:5px 11px;border-radius:2px;
+  }
+
+  /* projects */
+  .project{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+    background:var(--white);border:1px solid var(--line);padding:8px;margin-bottom:28px;
+  }
+  @media(max-width:720px){.project{grid-template-columns:1fr}}
+  .project-img{background:var(--paper-2);border:1px solid var(--line);overflow:hidden;aspect-ratio:16/11;display:flex;align-items:center;justify-content:center}
+  .project-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .project-body{padding:20px 26px 26px}
+  .project-tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-bottom:10px}
+  .project-body h3{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin-bottom:12px;line-height:1.15}
+  .project-body p{color:var(--ink-soft);font-size:15.5px;margin-bottom:14px}
+  .result-line{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 18px}
+  .result{display:flex;flex-direction:column}
+  .result .n{font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:var(--accent)}
+  .result .t{font-size:11.5px;color:var(--ink-soft)}
+  .project-stack{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+  .project-links{display:flex;gap:16px}
+  .plink{font-size:14px;font-weight:600;color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
+  .plink:hover{border-color:var(--accent)}
+
+  /* education timeline */
+  .edu{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--line)}
+  @media(max-width:720px){.edu{grid-template-columns:1fr;gap:6px}}
+  .edu:first-of-type{border-top:none}
+  .edu-year{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)}
+  .edu-body h3{font-size:17px;font-weight:600;margin-bottom:4px}
+  .edu-body p{color:var(--ink-soft);font-size:15px}
+
+  /* contact */
+  .contact-box{text-align:center;padding:20px 0}
+  .contact-box h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,5vw,44px);margin-bottom:18px}
+  .contact-box p{color:var(--ink-soft);max-width:48ch;margin:0 auto 32px}
+  .contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+  footer{padding:40px 0;text-align:center}
+  footer p{font-size:13px;color:var(--ink-soft)}
+  .mono{font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand">L·H·<span>LOUA</span></a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="navtoggle" onclick="document.querySelector('.navlinks').style.display = document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="eyebrow">Network Engineer · Kigali / Musanze, Rwanda</div>
+    <h1 class="hero-title">Louis&nbsp;Honoré<br>LOUA</h1>
+    <p class="hero-sub">I design, deploy and secure reliable enterprise networks — from Cisco routing and switching on real hardware to <strong>software-defined networking</strong> that enforces security policy automatically.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="LOUA_Louis_Honore_Network_Engineer_CV.pdf" download>Download CV</a>
+      <a class="btn btn-ghost" href="https://github.com/Louis-Honore-LOUA" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/louis-honore-loua" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">19.5<span style="font-size:22px">/20</span></div><div class="lbl">Dissertation grade — highest university-wide</div></div>
+      <div class="stat"><div class="num">89.5%</div><div class="lbl">Latency reduction with SDN automation</div></div>
+      <div class="stat"><div class="num">5.0<span style="font-size:22px">/5.0</span></div><div class="lbl">GPA · First Class Honours</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-idx">01</span><h2 class="sec-title">About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a <strong>First Class Honours Computer Science graduate</strong> specialising in network engineering, based in Rwanda. My focus is building networks that stay fast, segmented and secure — and automating the parts that are usually configured by hand, box by box.</p>
+        <p>For my undergraduate dissertation I built a software-defined networking system (Ryu controller, OpenFlow, Mininet) that automates VLAN management and enforces directional security policy across a campus network. It was validated on <strong>real Cisco hardware</strong>, not only in simulation.</p>
+        <p>I'm now looking for Network Engineer roles where I can build dependable infrastructure, while working toward a Master's in <strong>Cybersecurity</strong>.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><div class="k">DEGREE</div><div class="v">BSc Computer Science — Network Engineering</div></div>
+        <div class="fact"><div class="k">INSTITUTION</div><div class="v">INES-Ruhengeri, Rwanda</div></div>
+        <div class="fact"><div class="k">LANGUAGES</div><div class="v">French · English · Susu · Kpelle</div></div>
+        <div class="fact"><div class="k">FOCUS</div><div class="v">Routing, Switching, Network Security, SDN</div></div>
+        <div class="fact"><div class="k">STATUS</div><div class="v">Open to work — available immediately</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-idx">02</span><h2 class="sec-title">Technical Skills</h2></div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>◈ Routing &amp; Switching</h3>
+        <div class="chips">
+          <span class="chip">Cisco IOS</span><span class="chip">VLANs 802.1Q</span><span class="chip">Inter-VLAN Routing</span><span class="chip">Subnetting / VLSM</span><span class="chip">Static &amp; Dynamic Routing</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>◈ Network Security</h3>
+        <div class="chips">
+          <span class="chip">ACLs</span><span class="chip">AAA · RADIUS</span><span class="chip">TACACS+</span><span class="chip">IPSec VPN</span><span class="chip">GRE Tunnelling</span><span class="chip">Traffic Isolation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>◈ SDN &amp; Automation</h3>
+        <div class="chips">
+          <span class="chip">Software-Defined Networking</span><span class="chip">OpenFlow</span><span class="chip">Ryu Controller</span><span class="chip">Open vSwitch</span><span class="chip">Mininet</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>◈ Systems &amp; Scripting</h3>
+        <div class="chips">
+          <span class="chip">Linux</span><span class="chip">Python</span><span class="chip">C</span><span class="chip">C++</span><span class="chip">PowerShell</span><span class="chip">Cisco Packet Tracer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-idx">03</span><h2 class="sec-title">Projects</h2></div>
+
+    <div class="project">
+      <div class="project-img"><img src="topology.png" alt="SDN campus VLAN topology"></div>
+      <div class="project-body">
+        <div class="project-tag">DISSERTATION · 2025–2026</div>
+        <h3>SDN-Based Automated VLAN Management</h3>
+        <p>A software-defined networking system that automates VLAN management and enforces directional security policy across a four-VLAN campus network — compared head-to-head with a traditional Cisco configuration, and validated on real hardware.</p>
+        <div class="result-line">
+          <div class="result"><span class="n">89.5%</span><span class="t">latency reduction</span></div>
+          <div class="result"><span class="n">99.1%</span><span class="t">jitter reduction</span></div>
+          <div class="result"><span class="n">0</span><span class="t">packet loss (authorised)</span></div>
+          <div class="result"><span class="n">100%</span><span class="t">policy enforcement</span></div>
+        </div>
+        <div class="project-stack chips">
+          <span class="chip">Ryu</span><span class="chip">OpenFlow</span><span class="chip">Mininet</span><span class="chip">Open vSwitch</span><span class="chip">Cisco</span><span class="chip">Python</span>
+        </div>
+        <div class="project-links">
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA/sdn-automated-vlan-management" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-img"><img src="testbed.png" alt="Physical Cisco test bench"></div>
+      <div class="project-body">
+        <div class="project-tag">HANDS-ON LABS · 2024–2026</div>
+        <h3>Cisco Networking &amp; Security Labs</h3>
+        <p>A set of hands-on labs on real and emulated Cisco equipment: centralised device access with AAA, encrypted site-to-site connectivity, and enterprise VLAN segmentation — the traditional counterpart to the SDN work above.</p>
+        <div class="project-stack chips">
+          <span class="chip">RADIUS</span><span class="chip">TACACS+</span><span class="chip">IPSec VPN</span><span class="chip">GRE</span><span class="chip">Catalyst 3560</span><span class="chip">ISR 1100</span>
+        </div>
+        <div class="project-links">
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA" target="_blank" rel="noopener">More on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-idx">04</span><h2 class="sec-title">Education</h2></div>
+
+    <div class="edu">
+      <div class="edu-year">2023 — 2026</div>
+      <div class="edu-body">
+        <h3>BSc Computer Science — Network Engineering</h3>
+        <p>INES-Ruhengeri, Rwanda · First Class Honours · Cumulative average 81.25% (GPA 5.0/5.0) · Final-year average 85.85% · Taught in English</p>
+      </div>
+    </div>
+
+    <div class="edu">
+      <div class="edu-year">2026</div>
+      <div class="edu-body">
+        <h3>Graduate Bridge Program</h3>
+        <p>Carnegie Mellon University Africa (CMU-Africa) · Competitive program strengthening advanced computing foundations</p>
+      </div>
+    </div>
+
+    <div class="edu">
+      <div class="edu-year">CERTS</div>
+      <div class="edu-body">
+        <h3>Cisco Networking Academy</h3>
+        <p>Introduction to Cybersecurity (2026) · CCNA: Introduction to Networks (expected Dec 2026) · Networking &amp; Cybersecurity Internship — TrusterLabs Ltd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>Let's build something reliable.</h2>
+      <p>Open to Network Engineer roles and cybersecurity opportunities. The fastest way to reach me is email.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:louishonoreloua2026@gmail.com">louishonoreloua2026@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/Louis-Honore-LOUA" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/louis-honore-loua" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="mono">Louis Honoré LOUA · Musanze, Rwanda · +250 795 050 445</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -144,6 +144,60 @@
   footer{padding:40px 0;text-align:center}
   footer p{font-size:13px;color:var(--ink-soft)}
   .mono{font-family:'JetBrains Mono',monospace}
+
+  /* ---- project grid ---- */
+  .grid-head{
+    font-family:'Fraunces',serif;font-weight:600;font-size:19px;
+    color:var(--ink);margin:38px 0 16px;padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+  .pcard{
+    background:var(--white);border:1px solid var(--line);
+    display:flex;flex-direction:column;overflow:hidden;
+    transition:border-color .2s, transform .2s;
+  }
+  .pcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .pcard-img{aspect-ratio:16/10;overflow:hidden;background:var(--paper-2);border-bottom:1px solid var(--line)}
+  .pcard-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .pcard-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+  .pcard-top{padding:20px 22px 0;display:flex;align-items:center;gap:10px}
+  .pcard-icon{font-size:26px;color:var(--accent);line-height:1}
+  .pcard h4{
+    font-family:'Fraunces',serif;font-weight:600;font-size:19px;
+    margin:8px 0 10px;line-height:1.2;
+  }
+  .pcard > h4, .pcard > p, .pcard > .chips, .pcard > .plink{padding:0 22px}
+  .pcard > .plink{padding-bottom:22px;display:inline-block;margin-top:auto}
+  .pcard p{color:var(--ink-soft);font-size:14.5px;margin-bottom:14px}
+  .pcard .chips{margin-bottom:16px}
+  .pcard .chip{font-size:11.5px;padding:4px 9px}
+  .pcard .plink{margin-top:auto;font-size:13.5px}
+  .pcard-plain .pcard-photo{
+    margin-top:auto;border:1px solid var(--line);overflow:hidden;
+    aspect-ratio:16/11;
+  }
+  .pcard-plain .pcard-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .cipher-viz{
+    aspect-ratio:16/10;background:var(--ink);
+    border-bottom:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:14px;padding:18px;
+  }
+  .cipher-formula{
+    font-family:'JetBrains Mono',monospace;font-size:15px;
+    color:#7FD1BC;letter-spacing:.02em;
+  }
+  .cipher-chain{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center}
+  .cipher-chain span{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    color:#C9D6E8;background:rgba(255,255,255,.07);
+    padding:3px 6px;border-radius:2px;white-space:nowrap;
+  }
+  .cipher-chain i{color:#7FD1BC;font-style:normal;font-size:9px}
 </style>
 </head>
 <body>
@@ -236,17 +290,18 @@
   <div class="wrap">
     <div class="sec-head"><span class="sec-idx">03</span><h2 class="sec-title">Projects</h2></div>
 
+    <!-- FEATURED -->
     <div class="project">
-      <div class="project-img"><img src="topology.png" alt="SDN campus VLAN topology"></div>
+      <div class="project-img"><img src="sdn-topology.jpg" alt="SDN campus VLAN topology"></div>
       <div class="project-body">
-        <div class="project-tag">DISSERTATION · 2025–2026</div>
+        <div class="project-tag">DISSERTATION &middot; 2025&ndash;2026</div>
         <h3>SDN-Based Automated VLAN Management</h3>
-        <p>A software-defined networking system that automates VLAN management and enforces directional security policy across a four-VLAN campus network — compared head-to-head with a traditional Cisco configuration, and validated on real hardware.</p>
+        <p>A software-defined networking system that automates VLAN management and enforces directional security policy across a four-VLAN campus network &mdash; compared head-to-head with a traditional Cisco configuration, and validated on real hardware.</p>
         <div class="result-line">
           <div class="result"><span class="n">89.5%</span><span class="t">latency reduction</span></div>
           <div class="result"><span class="n">99.1%</span><span class="t">jitter reduction</span></div>
           <div class="result"><span class="n">0</span><span class="t">packet loss (authorised)</span></div>
-          <div class="result"><span class="n">100%</span><span class="t">policy enforcement</span></div>
+          <div class="result"><span class="n">19.5/20</span><span class="t">highest university-wide</span></div>
         </div>
         <div class="project-stack chips">
           <span class="chip">Ryu</span><span class="chip">OpenFlow</span><span class="chip">Mininet</span><span class="chip">Open vSwitch</span><span class="chip">Cisco</span><span class="chip">Python</span>
@@ -257,19 +312,94 @@
       </div>
     </div>
 
-    <div class="project">
-      <div class="project-img"><img src="testbed.png" alt="Physical Cisco test bench"></div>
-      <div class="project-body">
-        <div class="project-tag">HANDS-ON LABS · 2024–2026</div>
-        <h3>Cisco Networking &amp; Security Labs</h3>
-        <p>A set of hands-on labs on real and emulated Cisco equipment: centralised device access with AAA, encrypted site-to-site connectivity, and enterprise VLAN segmentation — the traditional counterpart to the SDN work above.</p>
-        <div class="project-stack chips">
-          <span class="chip">RADIUS</span><span class="chip">TACACS+</span><span class="chip">IPSec VPN</span><span class="chip">GRE</span><span class="chip">Catalyst 3560</span><span class="chip">ISR 1100</span>
+    <!-- GRID -->
+    <h3 class="grid-head">Security &amp; Cryptography</h3>
+    <div class="pgrid">
+
+      <article class="pcard">
+        <div class="cipher-viz">
+          <div class="cipher-formula">r(v(h(p(m(c(f(x)))))))</div>
+          <div class="cipher-chain">
+            <span>Rail Fence</span><i>&rarr;</i><span>Caesar</span><i>&rarr;</i><span>Mono</span><i>&rarr;</i><span>Playfair</span><i>&rarr;</i><span>Hill</span><i>&rarr;</i><span>Vigen&egrave;re</span><i>&rarr;</i><span>Row&nbsp;Transp.</span>
+          </div>
         </div>
-        <div class="project-links">
-          <a class="plink" href="https://github.com/Louis-Honore-LOUA" target="_blank" rel="noopener">More on GitHub</a>
+        <div class="pcard-top">
+          <span class="project-tag">PYTHON &middot; 7 CIPHERS</span>
         </div>
-      </div>
+        <h4>Multi-Layer Cipher Engine</h4>
+        <p>Chains seven classical ciphers into one pipeline, with a fully lossless inverse that restores punctuation, casing and the Playfair I/J merge exactly. Desktop GUI and a passing test suite.</p>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Hill</span><span class="chip">Playfair</span><span class="chip">Vigen&egrave;re</span><span class="chip">CustomTkinter</span>
+        </div>
+        <a class="plink" href="https://github.com/Louis-Honore-LOUA/multi-layer-cipher-engine" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+
+      <article class="pcard">
+        <div class="pcard-img"><img src="ipsec-topology.jpg" alt="IPSec site-to-site topology"></div>
+        <div class="pcard-body">
+          <span class="project-tag">IPSEC VPN</span>
+          <h4>Site-to-Site VPN</h4>
+          <p>An encrypted tunnel between HQ and a branch across an untrusted ISP backbone &mdash; with traceroute proof that the provider hops are hidden from the path.</p>
+          <div class="chips">
+            <span class="chip">IKE Phase 1/2</span><span class="chip">3DES</span><span class="chip">Crypto Maps</span>
+          </div>
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA/cisco-ipsec-site-to-site-vpn" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pcard-img"><img src="aaa-topology.jpg" alt="AAA RADIUS and TACACS+ topology"></div>
+        <div class="pcard-body">
+          <span class="project-tag">AAA</span>
+          <h4>RADIUS and TACACS+</h4>
+          <p>Centralised device-access control deployed with both protocols side by side on one network, so the practical differences between them are visible in a single topology.</p>
+          <div class="chips">
+            <span class="chip">RADIUS</span><span class="chip">TACACS+</span><span class="chip">AAA</span>
+          </div>
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA/cisco-aaa-radius-tacacs" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </article>
+
+    </div>
+
+    <h3 class="grid-head">WAN &amp; Routing</h3>
+    <div class="pgrid">
+
+      <article class="pcard">
+        <div class="pcard-img"><img src="gre-topology.jpg" alt="GRE full-mesh topology"></div>
+        <div class="pcard-body">
+          <span class="project-tag">GRE TUNNELLING</span>
+          <h4>Full-Mesh WAN Overlay</h4>
+          <p>Three sites linked by a GRE mesh across a provider backbone that carries no route to their private LANs. Covers tunnel MTU sizing and the underlay/overlay routing split.</p>
+          <div class="chips">
+            <span class="chip">GRE</span><span class="chip">MTU 1476</span><span class="chip">Overlay</span>
+          </div>
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA/cisco-gre-wan-tunnelling" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pcard-img"><img src="wan-topology.jpg" alt="Multi-site WAN topology"></div>
+        <div class="pcard-body">
+          <span class="project-tag">ENTERPRISE WAN</span>
+          <h4>Multi-Site Bank Network</h4>
+          <p>A bank branch network across Rwanda: 10 Cisco 2911 routers, HQ plus nine regional branches, VLSM addressing, static routing with OSPF, and ACL-based security.</p>
+          <div class="chips">
+            <span class="chip">OSPF</span><span class="chip">VLSM</span><span class="chip">ACLs</span><span class="chip">10 routers</span>
+          </div>
+          <a class="plink" href="https://github.com/Louis-Honore-LOUA/cisco-wan-multisite-network" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </article>
+
+      <article class="pcard pcard-plain">
+        <div class="pcard-body">
+          <span class="project-tag">HANDS-ON</span>
+          <h4>Real Hardware Test Bench</h4>
+          <p>The traditional configurations behind these labs were validated on physical Cisco equipment &mdash; a Catalyst 3560 switch and an ISR 1100 router &mdash; not only in simulation.</p>
+          <div class="pcard-photo"><img src="testbed.jpg" alt="Physical Cisco test bench"></div>
+        </div>
+      </article>
+
     </div>
 
   </div>
